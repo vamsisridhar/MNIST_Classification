@@ -27,11 +27,11 @@ class ImgData:
             raise ValueError('index n is out of bounds of the data')
     
     def getIntArray(self, n):
-        arr = np.zeros(self.getByteArray(n).shape)
+        arr = np.zeros((self.getByteArray(n).shape[0],self.getByteArray(n).shape[1] , 1))
         for i in range(self.getByteArray(n).shape[0]):
             for j in range(self.getByteArray(n).shape[1]):
-                arr[i][j] = int.from_bytes(self.getByteArray(n)[i][j], 'big')
-        return arr    
+                arr[i][j] = [int.from_bytes(self.getByteArray(n)[i][j], 'big')]
+        return np.array(arr)    
 
     def getLabel(self, n):
         if (n < self.TotalImgs):
